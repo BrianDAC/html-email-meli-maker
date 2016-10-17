@@ -1,0 +1,385 @@
+<style type="text/css">
+.buttons {
+	min-height: 600px;
+	width: 27%;
+	position: fixed;
+	left: 0;
+	background: #EEEFF0;
+	padding: 20px 20px;
+}
+
+.content {
+	display: inline-block;
+	width: 65%;
+	margin-left: 30%;
+	min-height: 600px;
+}
+
+#header {
+	height: 60px;
+	width: 100%;
+	background: #5DA7D0;
+}
+
+#body {
+	padding: 50px 20%;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.colorsElection {
+	margin-bottom: 5%;
+}
+
+.colorsElection .group {
+	margin-left: 5%;
+	min-height: 45px;
+}
+
+.colorsElection .group p {
+	float: left;
+}
+
+.colorsElection .group input {
+	float: right;
+	background: transparent;
+}
+
+.elements button {
+	padding: 0;
+	margin-bottom: 2%;
+}
+
+.elements {
+	padding-left: 5%;
+}
+
+.sections {
+	padding-left: 5%;
+}
+
+.sections button {
+	padding: 0;
+	margin-bottom: 2%;
+}
+
+.groups .group {
+	margin-bottom: 2%;
+}
+
+.groups .group label {
+	display: block;
+}
+
+.ui-autocomplete {
+	z-index: 10000 !important;
+}
+
+textarea {
+	resize: none;
+}
+
+.productOne {
+	background: white;
+}
+
+.productOne .structure1 {
+	float: left;
+	width: 50%;
+}
+
+.productOne .structure1 .image img {
+	width: 100%;
+}
+
+.productOne .structure2 {
+	float: left;
+	width: 50%;
+	padding: 17px 25px 20px 25px
+}
+
+.productOne .structure2 .title {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.productOne .structure2 .price {
+	color: #6c6c6c;
+	margin-bottom: 30px;
+}
+
+.productOne .structure2 a button{
+background: red;
+    color: white;
+    border-radius: 10px;
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 5%;
+    padding: 7px;
+    border: none;
+}
+
+.productTwo {
+	background: white;
+}
+
+.productTwo .structureTwo {
+    float: left;
+    width: 50%;
+}
+
+.productTwo .structureTwo .image {
+	padding: 0% 10px;
+    max-height: 150px;
+    text-align: center;
+}
+.productTwo .structureTwo .image img {
+    max-height: 150px;
+    text-align: center;
+    margin: auto;
+    height: 150px;
+}
+
+.productTwo .structureTwo .price {
+	color: #6c6c6c;
+	margin-bottom: 30px;
+	    margin-left: 15px;
+
+}
+.productTwo .structureTwo .title {
+	font-size: 20px;
+	margin-bottom: 10px;
+	    margin-left: 15px;
+
+}
+
+.productTwo .structureTwo a button{
+background: red;
+    color: white;
+    border-radius: 10px;
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 5%;
+    padding: 7px;
+    border: none;
+        margin-left: 15px;
+
+}
+
+.productThree {
+	background: white;
+}
+
+.productThree .structureThree {
+    float: left;
+    width: 33%;
+}
+
+.productThree .structureThree .image {
+	padding: 0% 10px;
+    max-height: 100px;
+    text-align: center;
+}
+.productThree .structureThree .image img {
+    max-height: 100px;
+    text-align: center;
+    margin: auto;
+    height: 150px;
+}
+
+.productThree .structureThree .price {
+	color: #6c6c6c;
+	margin-bottom: 20px;
+	    margin-left: 15px;
+
+}
+.productThree .structureThree .title {
+	font-size: 15px;
+	margin-bottom: 10px;
+	    margin-left: 15px;
+
+}
+
+.productThree .structureThree a button{
+background: red;
+    color: white;
+    border-radius: 10px;
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 5%;
+    padding: 4px;
+    border: none;
+        margin-left: 15px;
+
+}
+
+.item {
+	margin-bottom: 10px;
+}
+</style>
+<div class="htmlMaker">
+	<div class="buttons">
+		<p class="title">Elecci&oacute;n de colores</p>
+		<div class="colorsElection">
+			<div class="group">
+				<p>Fondo:</p>
+				<input type="color" id="backgroundColor" ng-model="backgroundColor" ng-change="changeBackgroundColor()" />
+			</div>
+			<div class="group">
+				<p>Encabezado y pie:</p>
+				<input type="color" id="headerColor" ng-model="headerColor" ng-change="changeHeaderColor()" />
+			</div>
+		</div>
+		<p class="title">Secciones</p>
+		<div class="sections">
+			<button data-toggle="modal" data-target="#sectionModal" ng-click="createSectionOne()"><img src="images/p1.png"></button>
+			<button data-toggle="modal" data-target="#sectionModal" ng-click="createSectionTwo()"><img src="images/p2.png"></button>
+			<button data-toggle="modal" data-target="#sectionModal" ng-click="createSectionThree()"><img src="images/p3.png"></button>
+		</div>
+		<p class="title">Elecci&oacute;n de colores</p>
+		<div class="elements">
+			<button ng-click="createText()"><img src="images/b1.png"></button>
+			<button ng-click="createImg()"><img src="images/b2.png"></button>
+			<button ng-click="createDivider()"><img src="images/b3.png"></button>
+			<button ng-click="createLine()"><img src="images/b4.png"></button>
+			<button ng-click="createButton()"><img src="images/b5.png"></button>
+		</div>
+	</div>
+	<div class="content" style="background:#ECEBEB;">
+		<div id="header">
+			<div id="socialMediaHeader">
+			</div>
+		</div>
+		<div id="body">
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Crear {{edit.name}}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="groups" ng-show="edit.name == 'texto'">
+						<div class="group">
+							<label>Texto</label>
+							<textarea rows="5" ng-model="edit.value"></textarea>
+						</div>
+						<div class="group">
+							<label>Tama&ntilde;o de fuente</label>
+							<input type="text" ng-model="edit.size" />
+						</div>
+						<div class="group">
+							<label>Color</label>
+							<input type="color" ng-model="edit.color" />
+						</div>
+					</div>
+					<div class="groups" ng-show="edit.name == 'imagen'">
+						<div class="group">
+							<label>Inserte el link a redireccionar</label>
+							<input type="text" style="width: 80%" ng-model="edit.url" />
+						</div>
+						<div class="group">
+							<label>Inserte el url de la imagen</label>
+							<input type="text" style="width: 80%" ng-model="edit.value" />
+						</div>
+					</div>
+					<div class="groups" ng-show="edit.name == 'boton'">
+						<div class="group">
+							<label>Texto del boton</label>
+							<input type="text" ng-model="edit.value" />
+						</div>
+						<div class="group">
+							<label>Tama&ntilde;o de fuente</label>
+							<input type="text" ng-model="edit.size" />
+						</div>
+						<div class="group">
+							<label>Color de fuente</label>
+							<input type="color" ng-model="edit.color" />
+						</div>
+						<div class="group">
+							<label>Color del boton</label>
+							<input type="color" ng-model="edit.backColor" />
+						</div>
+					</div>
+					<div class="groups" ng-show="edit.name == 'linea'">
+						<div class="group">
+							<label>Color de la linea</label>
+							<input type="color" ng-model="edit.backColor" />
+						</div>
+					</div>
+					<div class="groups" ng-show="edit.name == 'separador'">
+						<div class="group">
+							<label>Color del separador</label>
+							<input type="color" ng-model="edit.backColor" />
+						</div>
+						<div class="group">
+							<label>Transparente</label>
+							<input type="checkbox" ng-model="edit.transparent" />
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" ng-click="createItem()">Crear</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="sectionsModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Productos</h4>
+			</div>
+			<div class="modal-body">
+				<div class="groups" ng-show="activeP == 'one'">
+					<div class="group">
+						<label>Seleccione su producto</label>
+						<input id="product1" />
+					</div>
+				</div>
+				<div class="groups" ng-show="activeP == 'two'">
+					<div class="group">
+						<label>Seleccione su producto</label>
+						<input id="productTwo1" />
+					</div>
+					<div class="group">
+						<label>Seleccione su producto</label>
+						<input id="productTwo2" />
+					</div>
+				</div>
+				<div class="groups" ng-show="activeP == 'three'">
+					<div class="group">
+						<label>Seleccione su producto</label>
+						<input id="productThree1" />
+					</div>
+					<div class="group">
+						<label>Seleccione su producto</label>
+						<input id="productThree2" />
+					</div>
+					<div class="group">
+						<label>Seleccione su producto</label>
+						<input id="productThree3" />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary" ng-show="activeP == 'one'" ng-click="createProductOne()">Crear</button>
+				<button type="button" class="btn btn-primary" ng-show="activeP == 'two'" ng-click="createProductTwo()">Crear</button>
+				<button type="button" class="btn btn-primary" ng-show="activeP == 'three'" ng-click="createProductThree()">Crear</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
