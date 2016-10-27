@@ -3802,6 +3802,33 @@ textarea {
         </tbody>
     </table>
     <!-- end 100% wrapper (white background) -->
+    <div class="botones">
+        <p class="tituloBotones">Elecci&oacute;n de colores</p>
+        <div class="colorsElection">
+            <div class="group">
+                <p>Fondo:</p>
+                <input type="color" id="backgroundColor" ng-model="backgroundColor" ng-change="changeBackgroundColor()" />
+            </div>
+            <div class="group">
+                <p>Encabezado y pie:</p>
+                <input type="color" id="headerColor" ng-model="headerColor" ng-change="changeHeaderColor()" />
+            </div>
+        </div>
+        <p class="tituloBotones">Secciones</p>
+        <div class="sections">
+            <button data-toggle="modal" data-target="#sectionModal" ng-click="createSectionOne()"><img src="images/p1.png"></button>
+            <button data-toggle="modal" data-target="#sectionModal" ng-click="createSectionTwo()"><img src="images/p2.png"></button>
+            <button data-toggle="modal" data-target="#sectionModal" ng-click="createSectionThree()"><img src="images/p3.png"></button>
+        </div>
+        <p class="tituloBotones">Elecci&oacute;n de colores</p>
+        <div class="elements">
+            <button ng-click="createText()"><img src="images/b1.png"></button>
+            <button ng-click="createImg()"><img src="images/b2.png"></button>
+            <button ng-click="createDivider()"><img src="images/b3.png"></button>
+            <button ng-click="createLine()"><img src="images/b4.png"></button>
+            <button ng-click="createButton()"><img src="images/b5.png"></button>
+        </div>
+    </div>
     <div id="imgModal" class="modal">
         <div class="modal-content">
             <h4>Editar Imagen</h4>
