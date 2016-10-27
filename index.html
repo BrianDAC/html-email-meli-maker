@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Directiva</title>
-	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
-	<link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
-	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
-	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="directive.js"></script>
-</head>
-<body ng-app="brianDAC.html-tables-editor">
-<div class="controlador" ng-controller="control">
-<button ng-click="consola()">hazme clic</button>
-<bdac products="products" html="html"></bdac>
-	
-</div>
 
+<head>
+    <title>Directiva</title>
+    <!-- Compiled and minified CSS -->
+    <!-- Compiled and minified JavaScript -->
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="mate.css">
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="directive.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+</head>
+
+<body ng-app="brianDAC.html-tables-editor">
+    <div class="controlador" ng-controller="controller">
+        <bdac products="products" html="html"></bdac>
+
+    </div>
 </body>
+
 </html>
+<div style='width:100px;margin:auto'><i style='margin-right:40px' onclick='editImg()' class='iconEdit fa fa-pencil' aria-hidden='true'></i></span><i onclick='deleteImg()' class='iconEdit fa fa-trash' aria-hidden='true'></i></span>
+</div>
