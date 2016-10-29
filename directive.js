@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('brianDAC.html-tables-editor', [])
-	.controller("controller", function  ($scope) {
-			$scope.products = [{
+	.controller("controller", function($scope) {
+		$scope.products = [{
 			"id": "MLA608007087",
 			"site_id": "MLA",
 			"title": "Item De Testeof",
@@ -198,10 +198,110 @@ angular.module('brianDAC.html-tables-editor', [])
 					$("#seeOnline").css('display', 'block');
 				}
 				scope.changeHeaderColor = function() {
-					$("#backHeader").attr("bgcolor", scope.headerColor)
+					$(".headerNav").attr("bgcolor", scope.headerColor)
+					$(".footerNav").attr("bgcolor", scope.headerColor)
 				}
 				scope.changeBackgroundColor = function() {
-					$(".content").css("background", scope.backgroundColor)
+					$("#mainStructure").attr("bgcolor", scope.backgroundColor)
+				}
+				scope.editImage = function() {
+					scope.image = {};
+					$(".editing").removeClass("editing")
+
+					if ($(".imgEdit").parent().children('img').length == 0) {
+						scope.image.urlSource = $(".imgEdit").parent().children('a').children('img').attr('src')
+						scope.image.urlRedirect = $(".imgEdit").parent().children('a').attr('href')
+						scope.image.redirect = true;
+					} else {
+						scope.image.urlSource = $(".imgEdit").parent().children('img').attr('src')
+					}
+					$(".imgEdit").parent().addClass("editing")
+					scope.$apply()
+					$("#imgModal").openModal()
+
+				}
+				scope.updateImage = function() {
+					if (scope.image.redirect) {
+						$(".editing").children('a').attr('href', scope.image.urlRedirect);
+						$(".editing").children('a').children('img').attr('src', scope.image.urlSource);
+					} else {
+						$(".editing").children('img').attr('src', scope.image.urlSource);
+					}
+					scope.image = {};
+					scope.image.redirect = false;
+					$(".editing").removeClass("editing")
+
+				}
+				scope.editBtn = function() {
+					scope.btn = {};
+					$(".editing").removeClass("editing")
+
+					scope.btn.urlRedirect = $(".btnEdit").children('span').children('a').attr('href')
+					scope.btn.textColor = $(".btnEdit").children('span').children('a').css("color")
+					scope.btn.text = $(".btnEdit").children('span').children('a')[0].innerText
+					scope.btn.bgColor = $(".btnEdit").attr("bgColor")
+					$(".btnEdit").addClass("editing")
+					scope.$apply()
+					$("#btnModal").openModal()
+
+				}
+				scope.updateBtn = function() {
+					$(".editing").children('span').children('a').attr('href', scope.btn.urlRedirect)
+					$(".editing").children('span').children('a').css("color",scope.btn.textColor)
+					$(".editing").children('span').children('a')[0].innerText = scope.btn.text
+					$(".editing").attr("bgColor",scope.btn.bgColor)
+					scope.btn = {};
+					$(".editing").removeClass("editing");
+					btnOut()
+
+				}
+				scope.editText = function() {
+					scope.text = {};
+					$(".editing").removeClass("editing")
+
+					scope.text.textColor = $(".textEdit").css("color")
+					scope.text.text = $(".textEdit")[0].innerText
+
+					$(".textEdit").addClass("editing")
+					scope.$apply()
+					$("#textModal").openModal()
+
+				}
+				scope.updateText = function() {
+					$(".editing")[0].innerText = scope.text.text
+					$(".editing").css("color",scope.text.textColor)
+					scope.text = {};
+					$(".editing").removeClass("editing");
+					textOut()
+
+				}
+				scope.editLinks = function() {
+					scope.links = {};
+					$(".editing").removeClass("editing")
+					var links = $(".linksTable").children().length - 1;
+					for (var i = 0; i < links; i++) {
+						scope.links[i] = {};
+						scope.links[i].urlRedirect = $(".linksTable").children("span:nth-child("+(i+1)+")").children("a").attr("href");
+						scope.links[i].textColor = $(".linksTable").children("span:nth-child("+(i+1)+")").children("a").css("color");
+						scope.links[i].text = $(".linksTable").children("span:nth-child("+(i+1)+")").children("a")[0].innerText;
+					};
+					console.log("jerererer")
+					$(".linksEdit").addClass("editing")
+					scope.$apply()
+					$("#linksModal").openModal()
+
+				}
+				scope.updateLinks = function() {
+					var links = $(".linksTable").children().length;
+					for (var i = 0; i < links; i++) {
+						$(".linksTable").children("span:nth-child("+(i+1)+")").children("a").attr("href", scope.links[i].urlRedirect);
+						$(".linksTable").children("span:nth-child("+(i+1)+")").children("a").css("color", scope.links[i].textColor);
+						$(".linksTable").children("span:nth-child("+(i+1)+")").children("a")[0].innerText = scope.links[i].text;
+					};
+					scope.links = {};
+					$(".editing").removeClass("editing");
+					linksOut()
+
 				}
 				scope.createSectionOne = function() {
 					scope.activeP = 'one';
@@ -489,55 +589,21 @@ angular.module('brianDAC.html-tables-editor', [])
 							backColor = "",
 							border = "";
 						if (scope.edit.size && parseInt(scope.edit.size)) {
-							size = "font-size:" + scope.edit.size + "px";
+							size = "font-size:" + scope.edit.size + "px;";
 						};
 						if (scope.edit.color) {
-							color = "color:" + scope.edit.color
+							color = "color:" + scope.edit.color +";"
 						};
 						if (scope.edit.backColor) {
-							backColor = "background-color:" + scope.edit.backColor
+							backColor = scope.edit.backColor
 						};
-						html = "<div class='item boton' style=';margin-bottom=5%;'>" +
-							"<button style='border:none;" + size + ";" + color + ";" + backColor + ";'>" +
-							scope.edit.value +
-							"</button>"
-						"</div>"
+						html = "<td class='btnTable' bgcolor="+backColor+" width='auto' align='center' valign='middle' height='32' style='"+size+color+" border-radius:5px; background-clip: padding-box; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center; font-weight: 300; padding-left:18px; padding-right:18px; '><span style='color: #ffffff; font-weight: 300;'><a href='#' style='text-decoration: none; color: #ffffff; font-weight: 300;'>Download</a></span></td>"
 					};
 					$("#content").append(html)
-					$("#editModal").modal('hide');
 					scope.edit = {}
 				}
 				scope.deleteItem = function() {
-					console.log('here')
 					$('.editButtons').remove()
-				}
-				scope.editImage = function () {
-					scope.image = {};
-					$(".editing").removeClass("editing")
-
-					if ($(".imgEdit").parent().children('img').length == 0) {
-						scope.image.urlSource = $(".imgEdit").parent().children('a').children('img').attr('src')
-						scope.image.urlRedirect = $(".imgEdit").parent().children('a').attr('href')
-						scope.image.redirect = true;
-					} else {
-						scope.image.urlSource = $(".imgEdit").parent().children('img').attr('src')
-					}
-					$(".imgEdit").parent().addClass("editing")
-					scope.$apply()
-					$("#imgModal").openModal()
-
-				}
-				scope.updateImage = function () {
-					if (scope.image.redirect) {
-						$(".editing").children('a').attr('href',scope.image.urlRedirect);
-						$(".editing").children('a').children('img').attr('src',scope.image.urlSource);
-					} else {
-						$(".editing").children('img').attr('src',scope.image.urlSource);
-					}
-					scope.image = {};
-					scope.image.redirect = false;
-					$(".editing").removeClass("editing")
-
 				}
 				scope.editItem = function() {
 					scope.edit.item = $('.editButtons');
@@ -782,7 +848,34 @@ angular.module('brianDAC.html-tables-editor', [])
 	});
 
 
-
+function btnOut () {
+	$(".btnEdit").children('div').remove()
+	$(".btnEdit").css("cursor", 'auto');
+	$(".btnEdit").removeAttr("href");
+	$(".btnEdit").removeAttr("onclick");
+	$(".btnEdit").removeClass("btnEdit");
+}
+function textOut () {
+	$(".textEdit").children('div').remove()
+	$(".textEdit").css("cursor", 'auto');
+	$(".textEdit").removeAttr("href");
+	$(".textEdit").removeAttr("onclick");
+	$(".textEdit").removeClass("textEdit");
+}
+function linksOut () {
+	$(".linksEdit").children('div').remove()
+	$(".linksEdit").css("cursor", 'auto');
+	$(".linksEdit").removeAttr("href");
+	$(".linksEdit").removeAttr("onclick");
+	$(".linksEdit").removeClass("linksEdit");
+}
+function trOut () {
+	$(".trEdit").children('div').remove()
+	$(".trEdit").css("cursor", 'auto');
+	$(".trEdit").removeAttr("href");
+	$(".trEdit").removeAttr("onclick");
+	$(".trEdit").removeClass("trEdit");
+}
 $(document).on("mouseover", ".item", function() {
 	if (!$(this).has(".bar").length) {
 		$(this).append("<div class='bar'>" +
@@ -796,25 +889,37 @@ $(document).on("mouseover", ".item", function() {
 
 $(document).on("mouseout", ".imgEdit", function(e) {
 	if (e.relatedTarget != 'imgEdit') {
-		if ($(".imgEdit").parent()[0].localName=="a") {
-		    $(".imgEdit").parent().parent().css("position",'none');
+		if ($(".imgEdit").parent()[0].localName == "a") {
+			$(".imgEdit").parent().parent().css("position", 'none');
 		} else {
-		    $(".imgEdit").parent().css("position",'none');
+			$(".imgEdit").parent().css("position", 'none');
 		}
 		$(".imgEdit").remove()
 	};
 })
 
-$(document).ready(function() {
-
-	$("#socialMediaHeader").hover(function() {
-		$(this).append("<div class='bar'>" +
-			"<span data-target='#socialModal' data-toggle='modal'><i class='fa fa-pencil' aria-hidden='true'></i></span>" +
-			"</div>")
-		$(this).addClass('editButtons')
-	}, function() {
-		$(this).removeClass('editButtons')
-		$('.bar').remove()
-	})
-
+$(document).on("mouseout", ".btnEdit", function(e) {
+	if (e.relatedTarget.localName != 'div' && e.relatedTarget.localName != 'i') {
+		btnOut()
+	}
 })
+
+$(document).on("mouseout", ".textEdit", function(e) {
+	if (e.relatedTarget.localName != 'div' && e.relatedTarget.localName != 'i') {
+		textOut()
+	}
+})
+
+$(document).on("mouseout", ".linksEdit", function(e) {
+	if (e.relatedTarget.localName != 'div' && e.relatedTarget.localName != 'i') {
+		linksOut()
+	}
+})
+
+
+$(document).on("mouseout", ".trEdit", function(e) {
+	if (!$.contains($(".trEdit")[0], e.relatedTarget)) {
+		trOut()
+	}
+})
+

@@ -32,6 +32,44 @@
     background: black;
     opacity: 0.5;
 }
+.btnEdit div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0.5;
+}
+.textEdit div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0.5;
+}
+.linksEdit div {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0.5;
+}
+.trBlock > div {
+    position: absolute;
+    width: 50px;
+    top: 0;
+    bottom: 0;
+    background: black;
+    opacity: 0.5;
+    right: 20%;
+    padding-top: 5px;
+    min-height: 60px;
+}
 .tituloBotones {
     font-weight: bold;
 }
@@ -735,17 +773,17 @@ textarea {
 
 <body style="font-size:12px; font-family:Roboto,Open Sans,Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; background-color:#ffffff; ">
     <!--start 100% wrapper (white background) -->
-    <table width="100%" id="mainStructure" border="0" cellspacing="0" cellpadding="0" style="background-color:#ecebeb;">
+    <table width="100%" id="mainStructure" border="0" cellspacing="0" cellpadding="0" bgcolor="#ecebeb">
         <!--START VIEW ONLINE AND ICON SOCAIL -->
         <tbody>
             <tr>
-                <td align="center" valign="top" style="background-color: #d05d68; ">
+                <td  align="center" class="headerNav" valign="top" bgcolor="#9CD5E8">
                     <!-- start container 600 -->
-                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color: #d05d68; padding-left:20px; padding-right:20px; ">
+                    <table width="600" align="center" border="0" bgcolor="#9CD5E8" cellspacing="0" cellpadding="0" class="container headerNav" style="padding-left:20px; padding-right:20px; ">
                         <tbody>
                             <tr>
                                 <td valign="top">
-                                    <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style=" background-color: #d05d68; ">
+                                    <table  width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width ">
                                         <!-- start space -->
                                         <tbody>
                                             <tr>
@@ -866,15 +904,15 @@ textarea {
             </tr>
             <!--END VIEW ONLINE AND ICON SOCAIL-->
             <!--START TOP NAVIGATION ​LAYOUT-->
-            <tr>
-                <td valign="top">
+            <tr >
+                <td class="trBlock" valign="top">
                     <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
                         <!-- START CONTAINER NAVIGATION -->
                         <tbody>
                             <tr>
                                 <td align="center" valign="top">
                                     <!-- start top navigation container -->
-                                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="padding-left:20px; padding-right:20px;">
+                                    <table  width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="padding-left:20px; padding-right:20px;">
                                         <tbody>
                                             <tr>
                                                 <td valign="top">
@@ -913,7 +951,7 @@ textarea {
                                                                                     <table align="center" border="0" cellpadding="0" cellspacing="0" class="clear-align" style="height:100%;">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td style="font-size: 13px;  line-height: 18px; color: #a3a2a2;  font-weight:300; text-align: center; font-family:Roboto,Open Sans,Arail,Tahoma, Helvetica, Arial, sans-serif;">
+                                                                                                <td class="linksTable" style="font-size: 13px;  line-height: 18px; color: #a3a2a2;  font-weight:300; text-align: center; font-family:Roboto,Open Sans,Arail,Tahoma, Helvetica, Arial, sans-serif;">
                                                                                                     <span style="text-decoration: none; color: #a3a2a2;"><a href="#" style="text-decoration: none; color: #a3a2a2; ">ABOUT</a></span> &nbsp;&nbsp; <span style="text-decoration: none; color: #a3a2a2;"><a href="#" style="text-decoration: none; color: #a3a2a2; ">SERVICE</a></span> &nbsp;&nbsp; <span style="text-decoration: none; color: #a3a2a2;"><a href="#" style="text-decoration: none; color: #a3a2a2; ">CONTACT</a></span>
                                                                                                 </td>
                                                                                             </tr>
@@ -1041,7 +1079,7 @@ textarea {
                                                                             </tr>
                                                                             <!--end space height -->
                                                                             <tr>
-                                                                                <td style="font-size: 13px; line-height: 22px; font-family:Roboto,Open Sans,Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:center; ">
+                                                                                <td class="textTable" style="font-size: 13px; line-height: 22px; font-family:Roboto,Open Sans,Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:center; ">
                                                                                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempam et justo duo dolores et ea rebum. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempam et justo duo dolores et ea rebum.
                                                                                 </td>
                                                                             </tr>
@@ -1061,7 +1099,7 @@ textarea {
                                                                     <table border="0" align="center" cellpadding="0" cellspacing="0">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td width="auto" align="center" valign="middle" height="32" style=" background-color:#d05d68;  border-radius:5px; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:18px; padding-right:18px; ">
+                                                                                <td class="btnTable" width="auto" align="center" valign="middle" height="32" bgColor="#d05d68" style="  border-radius:5px; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#ffffff; font-weight: 300; padding-left:18px; padding-right:18px; ">
                                                                                     <span style="color: #ffffff; font-weight: 300;">
                                        <a href="#" style="text-decoration: none; color: #ffffff; font-weight: 300;">
                                         Download
@@ -1081,7 +1119,7 @@ textarea {
                                                                                     </table>
                                                                                 </td>
                                                                                 <!--end space width -->
-                                                                                <td width="auto" align="center" valign="middle" height="32" style=" background-color:#ffffff; border-radius:5px; border:1px solid #ececed; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#d05d68; font-weight: 300; padding-left:18px; padding-right:18px; ">
+                                                                                <td class="btnTable" width="auto" align="center" valign="middle" height="32" style=" background-color:#ffffff; border-radius:5px; border:1px solid #ececed; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#d05d68; font-weight: 300; padding-left:18px; padding-right:18px; ">
                                                                                     <span title="textColor" style="color: #d05d68; font-weight: 300;">
                                        <a href="#" title="textColor" style="text-decoration: none; color: #d05d68; font-weight: 300;">
                                         Read More
@@ -1218,7 +1256,7 @@ textarea {
                                                                             </tr>
                                                                             <!--end space height -->
                                                                             <tr>
-                                                                                <td style="font-size: 13px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                                                                <td class="textTable" style="font-size: 13px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
                                                                                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempam et justo duo dolores et ea rebum.
                                                                                 </td>
                                                                             </tr>
@@ -3765,13 +3803,13 @@ textarea {
             </tr>
             <!--END FOOTER ​LAYOUT-->
             <!--  START FOOTER COPY RIGHT -->
-            <tr>
-                <td align="center" valign="top" style="background-color:#d05d68;">
-                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color:#d05d68; padding-left:20px; padding-right:20px;">
+            <tr class="footer">
+                <td align="center" valign="top" class="footerNav" bgcolor="#9CD5E8">
+                    <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" bgcolor="#9CD5E8" class="headerNav container" style="padding-left:20px; padding-right:20px;">
                         <tbody>
                             <tr>
                                 <td valign="top">
-                                    <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color:#d05d68; ">
+                                    <table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="container headerNav" bgcolor="#9CD5E8" >
                                         <!--start space height -->
                                         <tbody>
                                             <tr>
@@ -3847,6 +3885,75 @@ textarea {
             <a ng-click="updateImage()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
         </div>
     </div>
+    <div id="btnModal" class="modal">
+        <div class="modal-content">
+            <h4>Editar Boton</h4>
+            <form>
+                <div class="input-field" >
+                  <input id="urlRedirect" type="text" class="validate" ng-model="btn.urlRedirect">
+                  <label for="urlRedirect">URL a redireccionar</label>
+                </div>
+                <div class="input-field">
+                  <input id="textColor" type="color" class="validate" ng-model="btn.textColor">
+                  <label for="textColor">Color de Texto</label>
+                </div>
+                <div class="input-field">
+                  <input id="bgColor" type="color" class="validate" ng-model="btn.bgColor">
+                  <label for="bgColor">Color de Fondo</label>
+                </div>
+                <div class="input-field">
+                  <input id="text" type="text" class="validate" ng-model="btn.text">
+                  <label for="text">Texto del boton</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="updateBtn()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
+        </div>
+    </div>
+    <div id="textModal" class="modal">
+        <div class="modal-content">
+            <h4>Editar texto</h4>
+            <form>
+                <div class="input-field" >
+                  <input id="text" type="text" class="validate" ng-model="text.text">
+                  <label for="text">Texto</label>
+                </div>
+                <div class="input-field" >
+                  <input id="textColor" type="color" class="validate" ng-model="text.textColor">
+                  <label for="textColor">Color del Texto</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="updateText()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
+        </div>
+    </div>
+    <div id="linksModal" class="modal">
+        <div class="modal-content">
+            <h4>Editar Links</h4>
+            <form>
+                <div ng-repeat="link in links" >
+                    Link {{$index}}
+                    <div class="input-field" >
+                      <input id="text" type="text" class="validate" ng-model="links[$index].urlRedirect">
+                      <label for="text">Url a redireccionar </label>
+                    </div>
+                    <div class="input-field" >
+                      <input id="text" type="text" class="validate" ng-model="links[$index].text">
+                      <label for="text">Texto </label>
+                    </div>
+                    <div class="input-field" >
+                      <input id="text" type="color" class="validate" ng-model="links[$index].textColor">
+                      <label for="text">Color del Texto</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="updateLinks()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
+        </div>
+    </div>
 </body>
 
 </html>
@@ -3856,7 +3963,7 @@ textarea {
     function editImg () {
         angular.element("#mainStructure").scope().editImage()
     }
-    $("img").on("mouseenter", function () {
+    $("#mainStructure").on("mouseenter",'img', function () {
         if ($(this).parent()[0].localName=="a") {
             $(this).parent().parent().css("position",'relative');
             $(this).parent().parent().append("<div href='#imgModal' class='imgEdit' onclick='editImg()' style='cursor:pointer;'><div style='width:27px;margin:auto;color:white;margin-top: 10px;'><i style='margin-right:40px;'  class='iconEdit fa fa-pencil fa-2x' aria-hidden='true'></i></div></div>")
@@ -3866,6 +3973,63 @@ textarea {
         }
 
     })
+    function editBtn () {
+        angular.element("#mainStructure").scope().editBtn()
+    }
+    $("#mainStructure").on("mouseenter",".btnTable", function () {
+        $(this).css("position",'relative');
+        $(this).attr("onclick",'editBtn()');
+        $(this).addClass('btnEdit');
+        $(this).attr("href",'#btnModal');
+        $(this).css("cursor",'pointer');
+        $(this).append("<div><i class='iconEdit fa fa-pencil' aria-hidden='true'></i></div>")
+
+    })
+    function editText () {
+        angular.element("#mainStructure").scope().editText()
+    }
+    $("#mainStructure").on("mouseenter",".textTable", function () {
+        $(this).css("position",'relative');
+        $(this).attr("onclick",'editText()');
+        $(this).addClass('textEdit');
+        $(this).attr("href",'#textModal');
+        $(this).css("cursor",'pointer');
+        $(this).append("<div><i class='iconEdit fa fa-pencil' aria-hidden='true'></i></div>")
+
+    })
+    function editLinks () {
+        angular.element("#mainStructure").scope().editLinks()
+    }
+    function editLinks () {
+        angular.element("#mainStructure").scope().editLinks()
+    }
+    $("#mainStructure").on("mouseenter",".linksTable", function () {
+        $(this).css("position",'relative');
+        $(this).attr("onclick",'editLinks()');
+        $(this).addClass('linksEdit');
+        $(this).attr("href",'#linksModal');
+        $(this).css("cursor",'pointer');
+        $(this).append("<div><i class='iconEdit fa fa-pencil' aria-hidden='true'></i></div>")
+
+    })
+    function trLinks () {
+        angular.element("#mainStructure").scope().editLinks()
+    }
+    $("#mainStructure").on("mouseenter",".trBlock", function () {
+        trOut()
+        $(this).css("position",'relative');
+        $(this).addClass('trEdit');
+        $(this).attr("href",'#trModal');
+        $(this).css("cursor",'pointer');
+        $(this).append("<div style='text-align:center;color:white'><i onclick='duplicateTr()' class='iconEdit fa fa-copy' aria-hidden='true' style='display: block;margin-bottom:10px;'></i><i onclick='deleteTr()' class='iconEdit fa fa-trash' aria-hidden='true' style='display: block;'></i></div>")
+
+    })
+    function duplicateTr () {
+        return $(".trEdit").parent().clone().insertBefore(".footer")
+    }
+    function deleteTr () {
+        $(".trEdit").parent().remove();
+    }
 </script>
 
 
