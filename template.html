@@ -74,6 +74,7 @@ span.note {
     left: 20%;
     padding-top: 5px;
     min-height: 60px;
+    z-index: 1000;
 }
 .trBlock > div:nth-child(3) {
     position: absolute;
@@ -85,6 +86,7 @@ span.note {
     right: 20%;
     padding-top: 5px;
     min-height: 60px;
+    z-index: 1000;
 }
 .tituloBotones {
     font-weight: bold;
@@ -1012,7 +1014,7 @@ textarea {
             <!-- END SHADOW-->
             <!-- START LAYOUT 2-->
             <tr>
-                <td align="center" valign="top" class="fix-box trBlock">
+                <td align="center" valign="top" class="fix-box trBlock item">
                     <!-- start layout-2 container width 600px -->
                     <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style="background-color: #ffffff;  padding-left:20px; padding-right:20px;">
                         <tbody>
@@ -1028,7 +1030,7 @@ textarea {
                                                     <table width="270" border="0" cellspacing="0" cellpadding="0" align="left" class="full-width">
                                                         <tbody>
                                                             <tr>
-                                                                <td valign="bottom" align="center">
+                                                                <td class="itemImg" valign="bottom" align="center">
                                                                     <a href="#">
                                                                         <img src="images/image1.png" width="270" alt="image1_480x501" style="display:block; max-width:270px; " border="0" hspace="0" vspace="0">
                                                                     </a>
@@ -1067,7 +1069,7 @@ textarea {
                                                                     <table border="0" cellspacing="0" cellpadding="0" align="left">
                                                                         <tbody>
                                                                             <tr>
-                                                                                <td style="font-size: 22px; line-height: 24px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#555555; font-weight:300; text-align:left;">
+                                                                                <td class="itemTitle" style="font-size: 22px; line-height: 24px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#555555; font-weight:300; text-align:left;">
                                                                                     <span style="color: #555555; font-weight: 300;">
                                        <a href="#" style="text-decoration: none; color: #555555; font-weight: 300;">
                                         PRODUCTS <span style="color:#d05d68;">DESIGN</span>
@@ -1082,7 +1084,7 @@ textarea {
                                                                             </tr>
                                                                             <!--end space height -->
                                                                             <tr>
-                                                                                <td class="textTable" style="font-size: 13px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
+                                                                                <td class="textTable itemDescription" style="font-size: 13px; line-height: 22px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; color:#a3a2a2; font-weight:300; text-align:left; ">
                                                                                     Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempam et justo duo dolores et ea rebum.
                                                                                 </td>
                                                                             </tr>
@@ -1097,7 +1099,7 @@ textarea {
                                                                                     <table border="0" align="left" cellpadding="0" cellspacing="0" style="border:1px solid #ececed; border-radius:5px;">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td class="btnTable" width="auto" align="center" valign="middle" height="30" style=" background-color:#ffffff;  border-radius:5px; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#d05d68; font-weight: 300; padding-left:18px; padding-right:18px; ">
+                                                                                                <td class="btnTable itemButton" width="auto" align="center" valign="middle" height="30" style=" background-color:#ffffff;  border-radius:5px; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#d05d68; font-weight: 300; padding-left:18px; padding-right:18px; ">
                                                                                                     <span style="color: #d05d68; font-weight: 300;">
                                              <a href="#" style="text-decoration: none; color: #d05d68; font-weight: 300;">
                                                Buy Now
@@ -1123,7 +1125,7 @@ textarea {
                                                                                     <table border="0" align="left" cellpadding="0" cellspacing="0" style="border:1px solid #ececed; border-radius:5px;">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td class="btnTable" width="auto" align="center" valign="middle" height="30" style=" background-color:#ffffff;  border-radius:5px; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#d05d68; font-weight: 300; padding-left:18px; padding-right:18px; ">
+                                                                                                <td class="btnTable itemButton" width="auto" align="center" valign="middle" height="30" style=" background-color:#ffffff;  border-radius:5px; background-clip: padding-box;font-size:13px; font-family:Roboto,Open Sans, Arial,Tahoma, Helvetica, sans-serif; text-align:center;  color:#d05d68; font-weight: 300; padding-left:18px; padding-right:18px; ">
                                                                                                     <span style="color: #d05d68; font-weight: 300;">
                                              <a href="#" style="text-decoration: none; color: #d05d68; font-weight: 300;">
                                                Read More
@@ -3785,18 +3787,29 @@ textarea {
             <h4>Editar Productos</h4>
             <form>
                 <div ng-repeat="item in items" >
-                    Producto {{$index}}
+                    Producto {{$index + 1}}
                     <div class="input-field">
-                      <select>
+                      <select ng-model="item.product">
                         <option value="" disabled selected>Elige tu producto</option>
-                        <option value="{{$index}}" ng-repeat="product in products" >{{product.name}}</option>
+                        <option value="{{$index}}" ng-repeat="product in products" >{{product.title}}</option>
                       </select>
-                    </div>
+                        <div class="input-field">
+                          <input placeholder="Placeholder" ng-model="item.btn.text" type="text" class="validate">
+                          <label for="first_name">Texto del boton</label>
+                        </div>
+                        <div class="input-field">
+                          <input placeholder="Placeholder" ng-model="item.btn.textColor" type="color" class="validate">
+                          <label for="first_name">Color del boton</label>
+                        </div>
+                        <div class="input-field">
+                          <input placeholder="Placeholder" ng-model="item.btn.bgColor" type="color" class="validate">
+                          <label for="first_name">Fondo del boton </label>
+                        </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
-            <a ng-click="updateLinks()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
+            <a ng-click="updateProducts()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
         </div>
     </div>
     <div id="newTextModal" class="modal">
@@ -3995,9 +4008,6 @@ textarea {
     function editLinks () {
         angular.element("#mainStructure").scope().editLinks()
     }
-    function editLinks () {
-        angular.element("#mainStructure").scope().editLinks()
-    }
     $("#mainStructure").on("mouseenter",".linksTable", function () {
         $(this).css("position",'relative');
         $(this).attr("onclick",'editLinks()');
@@ -4018,8 +4028,16 @@ textarea {
         $(this).css("cursor",'pointer');
         $(this).append("<div style='text-align:center;color:white'><i onclick='moveUp()' style='display: block;margin-bottom:15px;' class='fa fa-chevron-up' aria-hidden='true'></i><i onclick='moveDown()' class='fa fa-chevron-down' aria-hidden='true' style='display: block;'></i></div>")
         $(this).append("<div style='text-align:center;color:white'><i onclick='duplicateTr()' class='iconEdit fa fa-copy' aria-hidden='true' style='display: block;margin-bottom:15px;'></i><i onclick='deleteTr()' class='iconEdit fa fa-trash' aria-hidden='true' style='display: block;'></i></div>")
+        if ($(this).hasClass("item")) {
+            $(this).children("table").css("position","relative")
+            $(this).children("table").append("<div class='editP' style='z-index: 1000;text-align:center;color:white;position: absolute;width: 100%;height: 30px;background: rgba(0,0,0,0.5);top: 0;left: 0;' onclick='editItem()'>Editar producto <i style='margin-left: 15px;' class='fa fa-pencil' aria-hidden='true'></i></div>")
+        };
 
     })
+    function editItem () {
+        $(".trEdit").addClass("editItem")
+        angular.element("#mainStructure").scope().editProducts()
+    }
     function duplicateTr () {
         return $(".trEdit").parent().clone().insertBefore(".footer")
     }
@@ -4036,7 +4054,7 @@ textarea {
 
         $(".trEdit").parent().detach().insertAfter(nextItem);
     }
-    
+
     $(document).ready(function() {
       $('select').material_select();
       $('.modal-trigger').leanModal();
