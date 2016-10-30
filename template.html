@@ -8,6 +8,11 @@
     padding: 20px 20px;
 }
 
+span.note {
+    color: rgb(8, 8, 8);
+    font-size: 11px;
+}
+
 .content {
     display: inline-block;
     width: 65%;
@@ -3540,7 +3545,7 @@ textarea {
             </tr>
             <!-- END LAYOUT-16-->
             <!--START FOOTER LAYOUT-->
-            <tr>
+            <tr class="footer">
                 <td valign="top">
                     <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
                         <!-- START CONTAINER  -->
@@ -3624,7 +3629,7 @@ textarea {
             </tr>
             <!--END FOOTER ​LAYOUT-->
             <!--  START FOOTER COPY RIGHT -->
-            <tr class="footer">
+            <tr>
                 <td align="center" valign="top" class="footerNav" bgcolor="#9CD5E8">
                     <table width="600" align="center" border="0" cellspacing="0" cellpadding="0" bgcolor="#9CD5E8" class="headerNav container" style="padding-left:20px; padding-right:20px;">
                         <tbody>
@@ -3681,11 +3686,11 @@ textarea {
         </div>
         <p class="tituloBotones">Elecci&oacute;n de colores</p>
         <div class="elements">
-            <button ng-click="createText()"><img src="images/b1.png"></button>
-            <button ng-click="createImg()"><img src="images/b2.png"></button>
-            <button ng-click="createDivider()"><img src="images/b3.png"></button>
-            <button ng-click="createLine()"><img src="images/b4.png"></button>
-            <button ng-click="createButton()"><img src="images/b5.png"></button>
+            <button class="modal-trigger" href="#newTextModal"><img src="images/b1.png"></button>
+            <button class="modal-trigger" href="#newImageModal"><img src="images/b2.png"></button>
+            <button class="modal-trigger" href="#newSepartorModal"><img src="images/b3.png"></button>
+            <button class="modal-trigger" href="#newLineModal"><img src="images/b4.png"></button>
+            <button class="modal-trigger" href="#newButtonModal"><img src="images/b5.png"></button>
         </div>
     </div>
     <div id="imgModal" class="modal">
@@ -3794,6 +3799,156 @@ textarea {
             <a ng-click="updateLinks()" class=" modal-action modal-close waves-effect waves-green btn-flat">Actualizar</a>
         </div>
     </div>
+    <div id="newTextModal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <h4 class="col s6 left-align">
+                    Crea un nuevo texto
+                </h4>
+                <h6 class="col s6 right-align">
+                    * () -> valor por defecto
+                </h6>
+            </div>
+            <form>
+                <div class="input-field">
+                  <textarea id="text" type="text" class="validate materialize-textarea" ng-model="newText.text"></textarea>
+                  <label for="text">Texto</label>
+                </div>
+                <div class="input-field">
+                  <input id="size" type="number" class="validate" ng-model="newText.size">
+                  <label for="size">Tamaño <span class="note">(12px)</span></label>
+                </div>
+                <label for="color" style="font-size: 1rem;">Color</label>
+                <div class="input-field">
+                  <input id="color" type="color" class="validate" ng-model="newText.color">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="createNewText()" class=" modal-action modal-close waves-effect waves-green btn-flat">Agregar</a>
+        </div>
+    </div>
+    <div id="newImageModal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <h4 class="col s6 left-align">
+                    Agregar una nueva imagen
+                </h4>
+                <h6 class="col s6 right-align">
+                    * Solo URL's.
+                </h6>
+            </div>
+            <form>
+                <div class="input-field">
+                  <input id="url" type="text" class="validate" ng-model="newImage.url">
+                  <label for="url">URL</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="createNewImage()" class=" modal-action modal-close waves-effect waves-green btn-flat">Agregar</a>
+        </div>
+    </div>
+    <div id="newSepartorModal" class="modal" style="width: 40% !important;">
+        <div class="modal-content">
+            <div class="row">
+                <h4 class="col s6 left-align">
+                    Agregar un separador
+                </h4>
+                <h6 class="col s6 right-align">
+                    * () -> valor por defecto <br>
+                </h6>
+            </div>
+            <form>
+                <div class="input-field">
+                  <input id="size" type="number" class="validate" ng-model="newSeparator.size">
+                  <label for="size">Tamaño <span class="note">(20px)</span></label>
+                </div>
+                <label ng-show="!newSeparator.transparent" for="color" style="font-size: 1rem;">Color</label>
+                <div ng-show="!newSeparator.transparent" class="input-field">
+                  <input id="color" type="color" class="validate" ng-model="newSeparator.color">
+                </div>
+                <div class="input-field">
+                  <input id="transparent" type="checkbox" class="validate" ng-model="newSeparator.transparent">
+                  <label for="transparent">Transparente</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="createNewSeparator()" class=" modal-action modal-close waves-effect waves-green btn-flat">Agregar</a>
+        </div>
+    </div>
+    <div id="newButtonModal" class="modal" style="width: 40% !important;">
+        <div class="modal-content">
+            <div class="row">
+                <h4 class="col s6 left-align">
+                    Agregar un botón
+                </h4>
+                <h6 class="col s6 right-align">
+                    * () -> valor por defecto <br>
+                </h6>
+            </div>
+            <form>
+                <div class="input-field">
+                  <input id="url" type="text" class="validate" ng-model="newButton.url">
+                  <label for="url">URL a redireccionar</label>
+                </div>
+                <div class="input-field">
+                  <input id="text" type="text" class="validate" ng-model="newButton.text">
+                  <label for="text">Texto del botón</label>
+                </div>
+                <div class="input-field">
+                  <input id="fontSize" type="number" class="validate" ng-model="newButton.fontSize">
+                  <label for="fontSize">Tamaño de letra <span class="note">(13px)</span></label>
+                </div>
+                <br>
+                <label for="textColor" style="font-size: 1rem;">Color de letra <span class="note">(Blanco)</span></label>
+                <div class="input-field">
+                  <input id="textColor" type="color" class="validate" ng-model="newButton.textColor">
+                </div>
+                <br>
+                <label for="backGroundColor" style="font-size: 1rem;">Color del botón <span class="note">(Rojo)</span></label>
+                <div class="input-field">
+                  <input id="backGroundColor" type="color" class="validate" ng-model="newButton.backGroundColor">
+                </div>
+                <br>
+                <div class="input-field">
+                    <select ng-model="newButton.width">
+                        <option value="" selected>Auto</option>
+                        <option value="25">Pequeño</option>
+                        <option value="50">Mediano</option>
+                        <option value="75">Grande</option>
+                        <option value="100">Completo</option>
+                    </select>
+                    <label style="font-size: 1rem;">Tamaño del botón</label>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="createNewButton()" class=" modal-action modal-close waves-effect waves-green btn-flat">Agregar</a>
+        </div>
+    </div>
+    <div id="newLineModal" class="modal" style="width: 40% !important;">
+        <div class="modal-content">
+            <div class="row">
+                <h4 class="col s6 left-align">
+                    Agregar una linea
+                </h4>
+                <h6 class="col s6 right-align">
+                    * El tamaño es de 1px <br>
+                </h6>
+            </div>
+            <form>
+                <label for="color" style="font-size: 1rem;">Color</label>
+                <div class="input-field">
+                  <input id="color" type="color" class="validate" ng-model="newLine.color">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a ng-click="createNewLine()" class=" modal-action modal-close waves-effect waves-green btn-flat">Agregar</a>
+        </div>
+    </div>
 </body>
 
 </html>
@@ -3884,6 +4039,7 @@ textarea {
     
     $(document).ready(function() {
       $('select').material_select();
+      $('.modal-trigger').leanModal();
     });
               
 </script>

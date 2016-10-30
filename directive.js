@@ -1,7 +1,120 @@
 'use strict';
 
 angular.module('brianDAC.html-tables-editor', [])
-	.controller("controller", function($scope) {
+	.service("generateStructure", function($window) {
+		this.newText = function(text, fontSize, color) {
+			if (!fontSize) fontSize= 13;
+			if (!color) color= 'rgb(163, 162, 162)';
+			if (!text) text= 'Muestra';
+			var html = '<tr> <td align="center" valign="top" class="fix-box trBlock">' +
+						'<table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color: #ffffff; padding-left:20px; padding-right:20px;"><tbody>' +
+						'<tr><td valign="top"><table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style="background-color:#ffffff; "><tbody><tr>' +
+						'<td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center"><tbody><tr><td valign="top"><table border="0" cellspacing="0" cellpadding="0" align="center">' +
+						'<tbody><tr><td height="15"></td></tr><tr><td class="textTable" style="font-size: '+fontSize+'px; line-height: 22px; font-family: Roboto, &quot;Open Sans&quot;, Arial, Tahoma, Helvetica, sans-serif; color: '+color+'; font-weight: 300; text-align: center; position: relative; cursor: auto;">' +
+						text + '</td></tr><tr><td height="15"></td></tr></tbody></table></td></tr></tbody></table></td></tr><tr><td height="20"></td></tr></tbody></table></td></tr></tbody></table></td></tr>'
+			return html;	
+		}
+		this.newImage = function(url) {
+			if (!url) url = 'images/header-image.jpg';
+			var html = '<tr>'+
+			                '<td align="center" valign="top" class="fix-box trBlock">'+
+			                    '<table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width">'+
+			                        '<tbody>'+
+			                            '<tr>'+
+			                                '<td valign="top" class="image-100-percent" style="position: relative;">'+
+			                                    '<img src="'+url+'" width="600" alt="header-image" style="display:block !important;  max-width:600px;">'+
+			                                '</td>'+
+			                            '</tr>'+
+			                        '</tbody>'+
+			                    '</table>'+
+			                '</td>'+
+			            '</tr>'
+			return html;	
+		}
+		this.newSeparator = function(size, color, transparent) {
+			if (!size) size = 20;
+			if (!color) color = '#000000';
+			if (transparent) color = 'transparent';
+			var html = '<tr>'+
+			                '<td valign="top" align="center" class="fix-box trBlock" style="position: relative; cursor: auto;">'+
+			                    '<table width="600" height="'+size+'" align="center" border="0" cellspacing="0" cellpadding="0" style="background-color: '+color+';" class="full-width">'+
+			                        '<tbody>'+
+			                            '<tr>'+
+			                                '<td valign="top" height="'+size+'" style="position: relative;" class="editing"></td>'+
+			                            '</tr>'+
+			                        '</tbody>'+
+			                    '</table>'+
+			                '</td>'+
+			            '</tr>'
+			return html;	
+		}
+		this.newLine = function(color) {
+			if (!color) color = '#000000';
+			var html = '<tr>'+
+			                '<td valign="top" align="center" class="fix-box trBlock" style="position: relative; cursor: auto;">'+
+			                    '<table width="600" height="1" align="center" border="0" cellspacing="0" cellpadding="0" style="background-color: '+color+';" class="full-width">'+
+			                        '<tbody>'+
+			                            '<tr>'+
+			                                '<td valign="top" height="1" style="position: relative;" class="editing"></td>'+
+			                            '</tr>'+
+			                        '</tbody>'+
+			                    '</table>'+
+			                '</td>'+
+			            '</tr>'
+			return html;	
+		}
+		this.newButton = function(text, textColor, backGroundColor, width, fontSize, url) {
+			if (!textColor) textColor = '#ffffff';
+			if (!backGroundColor) backGroundColor = 'rgb(208, 93, 104)';
+			if (!width) width = 'auto';
+			if (!fontSize) fontSize = '13';
+			if (!url) url = $window.location.origin;
+			if (!text) text = 'Boton';
+			var html = '<tr>'+
+			                '<td align="center" valign="top" class="fix-box trBlock trEdit" href="#trModal" style="position: relative; cursor: pointer;">'+
+			                    '<table width="600" align="center" border="0" cellspacing="0" cellpadding="0" class="container" style="background-color: #ffffff; padding-left:20px; padding-right:20px;">'+
+			                        '<tbody>'+
+			                            '<tr>'+
+			                                '<td valign="top">'+
+			                                    '<table width="560" align="center" border="0" cellspacing="0" cellpadding="0" class="full-width" style="background-color:#ffffff; ">'+
+			                                        '<tbody>'+
+			                                            '<tr>'+
+			                                                '<td valign="top">'+
+			                                                    '<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">'+
+			                                                        '<tbody>'+
+			                                                            '<tr>'+
+			                                                                '<td valign="top" width="auto" align="center">'+
+			                                                                    '<table border="0" align="center" cellpadding="0" cellspacing="0" width="'+width+'%">'+
+			                                                                        '<tbody>'+
+			                                                                            '<tr>'+
+			                                                                                '<td class="btnTable btnEdit" width="auto" align="center" valign="middle" height="32" style="background-color: '+backGroundColor+'; border-radius: 5px; border: 1px solid rgb(236, 236, 237); background-clip: padding-box; font-size: 13px; font-family: Roboto, &quot;Open Sans&quot;, Arial, Tahoma, Helvetica, sans-serif; text-align: center; color: rgb(208, 93, 104); font-weight: 300; padding-left: 18px; padding-right: 18px; position: relative; cursor: pointer;" onclick="editBtn()" href="#btnModal">'+
+			                                                                                    '<span title="textColor" style="color: '+textColor+'; font-weight: 300;">'+
+															                                        '<a href="'+$window.location.origin+'/newClick?redirectUrl='+url+'" title="textColor" style="text-decoration: none; color: '+textColor+'; font-weight: 300; font-size: '+fontSize+'px;">'+
+															                                        	text+
+															                                        '</a>'+
+															                                    '</span>'+
+			                                                                                '</td>'+
+			                                                                            '</tr>'+
+			                                                                        '</tbody>'+
+			                                                                    '</table>'+
+			                                                                '</td>'+
+			                                                            '</tr>'+
+			                                                        '</tbody>'+
+			                                                    '</table>'+
+			                                                '</td>'+
+			                                            '</tr>'+
+			                                        '</tbody>'+
+			                                    '</table>'+
+			                                '</td>'+
+			                            '</tr>'+
+			                        '</tbody>'+
+			                    '</table>'+
+			                '</td>'+
+			            '</tr>'
+			return html;	
+		}
+	})
+	.controller("controller", function($scope, generateStructure) {
 		$scope.products = [{
 			"id": "MLA608007087",
 			"site_id": "MLA",
@@ -164,7 +277,7 @@ angular.module('brianDAC.html-tables-editor', [])
 			}]
 		}]
 	})
-	.directive('bdac', function() {
+	.directive('bdac', function(generateStructure) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -249,7 +362,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$(".editing").children('span').children('a').attr('href', scope.btn.urlRedirect)
 					$(".editing").children('span').children('a').css("color",scope.btn.textColor)
 					$(".editing").children('span').children('a')[0].innerText = scope.btn.text
-					$(".editing").attr("bgColor",scope.btn.bgColor)
+					$(".editing").css("background-color",scope.btn.bgColor).
 					scope.btn = {};
 					$(".editing").removeClass("editing");
 					btnOut()
@@ -542,7 +655,42 @@ angular.module('brianDAC.html-tables-editor', [])
 					console.log($(this))
 					console.log(this)
 					$(this).addClass('editButtons')
-				})
+				});
+
+				scope.createNewText = function () {
+					if (!scope.newText) scope.newText = {};
+					var toInsert = generateStructure.newText(scope.newText.text, scope.newText.size, scope.newText.color);
+					$(toInsert).insertBefore(".footer");
+					scope.newText = {};
+				};
+
+				scope.createNewImage = function () {
+					if (!scope.newImage) scope.newImage = {};
+					var toInsert = generateStructure.newImage(scope.newImage.url);
+					$(toInsert).insertBefore(".footer");
+					scope.newImage = {};
+				};
+
+				scope.createNewSeparator = function () {
+					if (!scope.newSeparator) scope.newSeparator = {};
+					var toInsert = generateStructure.newSeparator(scope.newSeparator.size, scope.newSeparator.color, scope.newSeparator.transparent);
+					$(toInsert).insertBefore(".footer");
+					scope.newSeparator = {};
+				};
+
+				scope.createNewButton = function () {
+					if (!scope.newButton) scope.newButton = {};
+					var toInsert = generateStructure.newButton(scope.newButton.text, scope.newButton.textColor, scope.newButton.backGroundColor, scope.newButton.width, scope.newButton.fontSize, scope.newButton.url);
+					$(toInsert).insertBefore(".footer");
+					scope.newButton = {};
+				};
+
+				scope.createNewLine = function () {
+					if (!scope.newLine) scope.newLine = {};
+					var toInsert = generateStructure.newLine(scope.newLine.color);
+					$(toInsert).insertBefore(".footer");
+					scope.newLine = {};
+				};
 
 				scope.createItem = function() {
 					var html = "";
