@@ -917,9 +917,9 @@ $(document).on("mouseout", ".linksEdit", function(e) {
 })
 
 
-$(document).on("mouseout", ".trEdit", function(e) {
-	if (!$.contains($(".trEdit")[0], e.relatedTarget)) {
-		trOut()
-	}
-})
+// $(document).on("click", ".trEdit", function(e) {
+// 	if (!$.contains($(".trEdit")[0], e.relatedTarget)) {
+// 		trOut()
+// 	}
+// })
 
