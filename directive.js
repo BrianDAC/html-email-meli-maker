@@ -285,7 +285,6 @@ angular.module('brianDAC.html-tables-editor', [])
 						scope.links[i].textColor = $(".linksTable").children("span:nth-child("+(i+1)+")").children("a").css("color");
 						scope.links[i].text = $(".linksTable").children("span:nth-child("+(i+1)+")").children("a")[0].innerText;
 					};
-					console.log("jerererer")
 					$(".linksEdit").addClass("editing")
 					scope.$apply()
 					$("#linksModal").openModal()
@@ -302,6 +301,36 @@ angular.module('brianDAC.html-tables-editor', [])
 					$(".editing").removeClass("editing");
 					linksOut()
 
+				}
+				scope.editProducts = function() {
+					scope.item = {};
+					$(".editing").removeClass("editing")
+					scope.item.title = $(".editItem").find(".itemTitle").find("a")[0].innerText.split("\n")[0];
+					scope.item.subtitle = $(".editItem").find(".itemTitle").find("a")[0].innerText.split("\n")[1];
+					scope.item.description = $(".editItem").find(".itemDescription")[0].innerText
+					scope.item.img = $(".editItem").find(".itemImg").children("a")[0].href
+					scope.items = [scope.item]
+
+					$(".editItem").addClass("editing")
+					scope.$apply()
+					$('select').material_select();
+					$("#itemsModal").openModal()
+
+				}
+				scope.updateProducts = function() {
+					var product = scope.products[scope.item.product]
+					$(".editItem").find(".itemTitle").find("a")[0].innerText = product.title;
+					scope.item.subtitle = $(".editItem").find(".itemTitle").find("a")[0].innerText.split("\n")[1];
+					$(".editItem").find(".itemDescription")[0].innerText = "Precio: "+ product.price.toFixed(2);	
+					$(".editItem").find(".itemImg").children("a").attr("href",product.permalink);
+					$(".editItem").find(".itemImg").children("a").children("img").attr("src",product.pictures[0].secure_url);
+
+					$(".editItem").find(".itemButton:eq(0)").find("a").attr("href",product.permalink);
+					$(".editItem").find(".itemButton:eq(0)").find("a")[0].innerText = scope.item.btn.text;
+					$(".editItem").find(".itemButton:eq(0)").find("a").css("color", scope.item.btn.textColor);
+					$(".editItem").find(".itemButton:eq(0)").css("background-color", scope.item.btn.bgColor);
+					$(".editing").removeClass("editing");
+					trOut()
 				}
 				scope.createSectionOne = function() {
 					scope.activeP = 'one';
@@ -533,17 +562,6 @@ angular.module('brianDAC.html-tables-editor', [])
 					$("#product2Three").val("")
 					$("#product3Three").val("")
 				}
-				$(".item").mouseover(function() {
-					console.log($(this))
-					console.log(this)
-					$(this).addClass('editButtons')
-				})
-				$(".item").hover(function() {
-					console.log($(this))
-					console.log(this)
-					$(this).addClass('editButtons')
-				})
-
 				scope.createItem = function() {
 					var html = "";
 					if (scope.edit.name == "texto") {
@@ -874,18 +892,10 @@ function trOut () {
 	$(".trEdit").css("cursor", 'auto');
 	$(".trEdit").removeAttr("href");
 	$(".trEdit").removeAttr("onclick");
+	$(".trEdit").removeClass("productEdit");
 	$(".trEdit").removeClass("trEdit");
+	$(".editP").remove();
 }
-$(document).on("mouseover", ".item", function() {
-	if (!$(this).has(".bar").length) {
-		$(this).append("<div class='bar'>" +
-			"<span onclick='deleteItem()' class='iconEdit'><i class='iconEdit fa fa-trash' aria-hidden='true'></i></span>" +
-			"<span onclick='editItem()' class='iconEdit'><i class='iconEdit fa fa-pencil' aria-hidden='true'></i></span>" +
-			"</div>")
-		$(this).addClass('editButtons')
-	}
-})
-
 
 $(document).on("mouseout", ".imgEdit", function(e) {
 	if (e.relatedTarget != 'imgEdit') {
