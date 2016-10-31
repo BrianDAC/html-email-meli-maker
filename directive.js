@@ -123,7 +123,7 @@ angular.module('brianDAC.html-tables-editor', [])
 			"seller_id": 202593498,
 			"category_id": "MLA3530",
 			"official_store_id": null,
-			"price": 10,
+			"price": 100,
 			"base_price": 10,
 			"original_price": null,
 			"currency_id": "ARS",
@@ -155,7 +155,7 @@ angular.module('brianDAC.html-tables-editor', [])
 			"seller_id": 202593498,
 			"category_id": "MLA3530",
 			"official_store_id": null,
-			"price": 10,
+			"price": 1,
 			"base_price": 10,
 			"original_price": null,
 			"currency_id": "ARS",
@@ -187,7 +187,7 @@ angular.module('brianDAC.html-tables-editor', [])
 			"seller_id": 202593498,
 			"category_id": "MLA3530",
 			"official_store_id": null,
-			"price": 10,
+			"price": 20,
 			"base_price": 10,
 			"original_price": null,
 			"currency_id": "ARS",
@@ -277,7 +277,8 @@ angular.module('brianDAC.html-tables-editor', [])
 			}]
 		}]
 	})
-	.directive('bdac', function(generateStructure) {
+.directive('bdac', function($rootScope) {
+		'ngInject'
 		return {
 			restrict: 'E',
 			scope: {
@@ -286,7 +287,10 @@ angular.module('brianDAC.html-tables-editor', [])
 			},
 			templateUrl: 'template.html',
 			link: function(scope, elements, attrs) {
+		
 				scope.edit = {};
+				// scope.currentUserLogo = $rootScope.currentUser.personalData.logo;
+				// scope.currentUserUrl = $rootScope.currentUser.personalData.url;
 				scope.image = {};
 				scope.socialMedia = {
 					facebook: "#",
@@ -302,14 +306,18 @@ angular.module('brianDAC.html-tables-editor', [])
 					scope.productTitles.push(scope.products[i].title)
 				};
 				scope.seeOnline = function() {
-					$("#seeOnline").css('display', 'none');
-					$(".editButtons").removeClass('editButtons')
-					$(".bar").remove();
+					btnOut()
+					textOut()
+					linksOut()
+					titleOut()
+					trOut()
+					$("#seeOnline").parent().css('display', 'none');
 					var win = window.open();
-					win.document.write($("#toEmail").html());
+					win.document.write($("#mainStructure").html());
 					win.document.close();
-					$("#seeOnline").css('display', 'block');
+					$("#seeOnline").parent().css('display', 'block');
 				}
+				
 				scope.changeHeaderColor = function() {
 					$(".headerNav").attr("bgcolor", scope.headerColor)
 					$(".footerNav").attr("bgcolor", scope.headerColor)
@@ -331,6 +339,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$(".imgEdit").parent().addClass("editing")
 					scope.$apply()
 					$("#imgModal").openModal()
+					Materialize.updateTextFields()
 
 				}
 				scope.updateImage = function() {
@@ -356,6 +365,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$(".btnEdit").addClass("editing")
 					scope.$apply()
 					$("#btnModal").openModal()
+					Materialize.updateTextFields()
 
 				}
 				scope.updateBtn = function() {
@@ -378,6 +388,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$(".textEdit").addClass("editing")
 					scope.$apply()
 					$("#textModal").openModal()
+					Materialize.updateTextFields()
 
 				}
 				scope.updateText = function() {
@@ -401,48 +412,116 @@ angular.module('brianDAC.html-tables-editor', [])
 					$(".linksEdit").addClass("editing")
 					scope.$apply()
 					$("#linksModal").openModal()
+					Materialize.updateTextFields()
 
 				}
 				scope.updateLinks = function() {
-					var links = $(".linksTable").children().length;
+					var links = $(".editing").children().length;
 					for (var i = 0; i < links; i++) {
-						$(".linksTable").children("span:nth-child("+(i+1)+")").children("a").attr("href", scope.links[i].urlRedirect);
-						$(".linksTable").children("span:nth-child("+(i+1)+")").children("a").css("color", scope.links[i].textColor);
-						$(".linksTable").children("span:nth-child("+(i+1)+")").children("a")[0].innerText = scope.links[i].text;
+						$(".editing").children("span:nth-child("+(i+1)+")").children("a").attr("href", scope.links[i].urlRedirect);
+						$(".editing").children("span:nth-child("+(i+1)+")").children("a").css("color", scope.links[i].textColor);
+						$(".editing").children("span:nth-child("+(i+1)+")").children("a")[0].innerText = scope.links[i].text;
 					};
 					scope.links = {};
 					$(".editing").removeClass("editing");
 					linksOut()
-
+				}
+				scope.editTitle = function() {
+					scope.title = {};
+					$(".editing").removeClass("editing")
+					var title = $(".titleEdit").children().length - 1;
+					scope.title.urlRedirect = $(".titleEdit").children("span").children("a").attr("href");
+					scope.title.textColor = $(".titleEdit").children("span").children("a").css("color");
+					scope.title.text = $(".titleEdit").children("span").children("a")[0].innerText;
+					$(".titleEdit").addClass("editing")
+					scope.$apply()
+					$("#titleModal").openModal()
+					Materialize.updateTextFields()
+				}
+				scope.updateTitle = function() {
+					$(".editing").children("span").children("a").attr("href", scope.title.urlRedirect);
+					$(".editing").children("span").children("a").css("color", scope.title.textColor);
+					$(".editing").children("span").children("a")[0].innerText = scope.title.text;
+					$(".editing").removeClass("editing");
+					titleOut()
 				}
 				scope.editProducts = function() {
-					scope.item = {};
+					$(".editing").removeClass("editing");
+					if ($(".editItem").length > 1) {
+					};
+					trOut()
+						scope.item = {0:{},1:{},2:{}};
+						scope.item.second = false;
+						scope.item.third = false;
+					scope.items = [1];
 					$(".editing").removeClass("editing")
-					scope.item.title = $(".editItem").find(".itemTitle").find("a")[0].innerText.split("\n")[0];
-					scope.item.subtitle = $(".editItem").find(".itemTitle").find("a")[0].innerText.split("\n")[1];
-					scope.item.description = $(".editItem").find(".itemDescription")[0].innerText
-					scope.item.img = $(".editItem").find(".itemImg").children("a")[0].href
-					scope.items = [scope.item]
 
+					if ($(".editItem").find(".itemSecond").length > 0) {
+						scope.items.push(1);
+						scope.item.second = true;
+					};
+					if ($(".editItem").find(".itemThird").length > 0) {
+						scope.item.third = true;
+						scope.items.push(1);
+					};
+
+					
 					$(".editItem").addClass("editing")
 					scope.$apply()
 					$('select').material_select();
 					$("#itemsModal").openModal()
+					Materialize.updateTextFields()
 
 				}
 				scope.updateProducts = function() {
-					var product = scope.products[scope.item.product]
-					$(".editItem").find(".itemTitle").find("a")[0].innerText = product.title;
-					scope.item.subtitle = $(".editItem").find(".itemTitle").find("a")[0].innerText.split("\n")[1];
-					$(".editItem").find(".itemDescription")[0].innerText = "Precio: "+ product.price.toFixed(2);	
-					$(".editItem").find(".itemImg").children("a").attr("href",product.permalink);
-					$(".editItem").find(".itemImg").children("a").children("img").attr("src",product.pictures[0].secure_url);
+					for (var key in scope.item) {
+						if (key == 0) {
+							var product = scope.products[scope.item[key].product]
+							$(".editItem").find(".itemTitle").find("a")[0].innerText = product.title;
+							$(".editItem").find(".itemDescription")[0].innerText = "Precio: "+ product.price.toFixed(2);	
+							$(".editItem").find(".itemImg").children("a").attr("href",product.permalink);
+							$(".editItem").find(".itemImg").children("a").children("img").attr("src",product.pictures[0].secure_url);
 
-					$(".editItem").find(".itemButton:eq(0)").find("a").attr("href",product.permalink);
-					$(".editItem").find(".itemButton:eq(0)").find("a")[0].innerText = scope.item.btn.text;
-					$(".editItem").find(".itemButton:eq(0)").find("a").css("color", scope.item.btn.textColor);
-					$(".editItem").find(".itemButton:eq(0)").css("background-color", scope.item.btn.bgColor);
+							$(".editItem").find(".itemButton:eq(0)").find("a").attr("href",product.permalink);
+							$(".editItem").find(".itemButton:eq(0)").find("a")[0].innerText = scope.item[key].btn.text;
+							$(".editItem").find(".itemButton:eq(0)").find("a").css("color", scope.item[key].btn.textColor);
+							$(".editItem").find(".itemButton:eq(0)").css("background-color", scope.item[key].btn.bgColor);
+						};
+
+						if (key == 1 && !scope.item.second) {
+							break
+						} else if (key == 1 && scope.item.second) {
+							var product = scope.products[scope.item[key].product]
+							$(".editItem").find(".itemSecond").find(".itemTitle").find("a")[0].innerText = product.title;
+							$(".editItem").find(".itemSecond").find(".itemDescription")[0].innerText = "Precio: "+ product.price.toFixed(2);	
+							$(".editItem").find(".itemSecond").find(".itemImg").children("a").attr("href",product.permalink);
+							$(".editItem").find(".itemSecond").find(".itemImg").children("a").children("img").attr("src",product.pictures[0].secure_url);
+
+							$(".editItem").find(".itemSecond").find(".itemButton:eq(0)").find("a").attr("href",product.permalink);
+							$(".editItem").find(".itemSecond").find(".itemButton:eq(0)").find("a")[0].innerText = scope.item[key].btn.text;
+							$(".editItem").find(".itemSecond").find(".itemButton:eq(0)").find("a").css("color", scope.item[key].btn.textColor);
+							$(".editItem").find(".itemSecond").find(".itemButton:eq(0)").css("background-color", scope.item[key].btn.bgColor);
+						}
+
+						if (key == 2 && !scope.item.third) {
+							break
+						} else if (key == 2 && scope.item.third) {
+							var product = scope.products[scope.item[key].product]
+							$(".editItem").find(".itemThird").find(".itemTitle").find("a")[0].innerText = product.title;
+							$(".editItem").find(".itemThird").find(".itemDescription")[0].innerText = "Precio: "+ product.price.toFixed(2);	
+							$(".editItem").find(".itemThird").find(".itemImg").children("a").attr("href",product.permalink);
+							$(".editItem").find(".itemThird").find(".itemImg").children("a").children("img").attr("src",product.pictures[0].secure_url);
+
+							$(".editItem").find(".itemThird").find(".itemButton:eq(0)").find("a").attr("href",product.permalink);
+							$(".editItem").find(".itemThird").find(".itemButton:eq(0)").find("a")[0].innerText = scope.item[key].btn.text;
+							$(".editItem").find(".itemThird").find(".itemButton:eq(0)").find("a").css("color", scope.item[key].btn.textColor);
+							$(".editItem").find(".itemThird").find(".itemButton:eq(0)").css("background-color", scope.item[key].btn.bgColor);
+						}
+
+					}
+
 					$(".editing").removeClass("editing");
+					$(".editItem").removeClass("editItem");
 					trOut()
 				}
 				scope.createSectionOne = function() {
@@ -451,7 +530,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$("#product1").autocomplete({
 						source: scope.productTitles
 					})
-					scope.openProductModal()
+					scope.openProductopenModal()
 				}
 				scope.createSectionTwo = function() {
 					scope.activeP = 'two';
@@ -463,7 +542,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$("#productTwo2").autocomplete({
 						source: scope.productTitles
 					})
-					scope.openProductModal()
+					scope.openProductopenModal()
 				}
 				scope.createSectionThree = function() {
 					scope.activeP = 'three';
@@ -479,7 +558,7 @@ angular.module('brianDAC.html-tables-editor', [])
 					$("#productThree3").autocomplete({
 						source: scope.productTitles
 					})
-					scope.openProductModal()
+					scope.openProductopenModal()
 				}
 				scope.createText = function() {
 					scope.edit = {};
@@ -509,9 +588,11 @@ angular.module('brianDAC.html-tables-editor', [])
 				}
 				scope.openModal = function() {
 					$("#editModal").modal("show")
+					Materialize.updateTextFields()
 				}
 				scope.openProductModal = function() {
 					$("#sectionsModal").modal("show")
+					Materialize.updateTextFields()
 				}
 				scope.createProductOne = function() {
 					var val = $("#product1").val(),
@@ -675,18 +756,6 @@ angular.module('brianDAC.html-tables-editor', [])
 					$("#product2Three").val("")
 					$("#product3Three").val("")
 				}
-				
-				$(".item").mouseover(function() {
-					console.log($(this))
-					console.log(this)
-					$(this).addClass('editButtons')
-				})
-				$(".item").hover(function() {
-					console.log($(this))
-					console.log(this)
-					$(this).addClass('editButtons')
-				});
-
 				scope.createNewText = function () {
 					if (!scope.newText) scope.newText = {};
 					var toInsert = generateStructure.newText(scope.newText.text, scope.newText.size, scope.newText.color);
@@ -1047,6 +1116,14 @@ function linksOut () {
 	$(".linksEdit").removeAttr("onclick");
 	$(".linksEdit").removeClass("linksEdit");
 }
+
+function titleOut () {
+	$(".titleEdit").children('div').remove()
+	$(".titleEdit").css("cursor", 'auto');
+	$(".titleEdit").removeAttr("href");
+	$(".titleEdit").removeAttr("onclick");
+	$(".titleEdit").removeClass("titleEdit");
+}
 function trOut () {
 	$(".trEdit").children('div').remove()
 	$(".trEdit").css("cursor", 'auto');
@@ -1086,10 +1163,15 @@ $(document).on("mouseout", ".linksEdit", function(e) {
 	}
 })
 
+$(document).on("mouseout", ".titleEdit", function(e) {
+	if (e.relatedTarget.localName != 'div' && e.relatedTarget.localName != 'i') {
+		titleOut()
+	}
+})
+
 
 // $(document).on("click", ".trEdit", function(e) {
 // 	if (!$.contains($(".trEdit")[0], e.relatedTarget)) {
 // 		trOut()
 // 	}
 // })
-
