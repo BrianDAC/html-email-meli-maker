@@ -123,30 +123,21 @@ i.iconEdit {
     opacity: 0.5;
 }
 
-.trBlock > div:nth-child(2) {
+.trBlock .editBar {
     position: absolute;
-    width: 50px;
-    top: 0;
-    bottom: 0;
+    width: 100%;
+    top: 100%;
     background: black;
-    opacity: 0.5;
-    left: 0%;
-    padding-top: 5px;
-    min-height: 60px;
+    height: 45px;
     z-index: 1000;
-}
+    left: 0;
+}   
 
-.trBlock > div:nth-child(3) {
-    position: absolute;
-    width: 50px;
-    top: 0;
-    bottom: 0;
-    background: black;
-    opacity: 0.5;
-    right: 0%;
-    padding-top: 5px;
-    min-height: 60px;
-    z-index: 1000;
+.copyIcon, .trashIcon, .productIcon {
+    font-size: 20px;
+    padding-top: 10px;
+    float: right;
+    padding-right: 20px;
 }
 
 .tituloBotones {
@@ -3205,12 +3196,12 @@ $("#mainStructure").on("click", ".trBlock", function() {
     $(this).addClass('trEdit');
     $(this).attr("href", '#trModal');
     $(this).css("cursor", 'pointer');
-    $(this).append("<div style='text-align:center;color:white'><i onclick='moveUp()' style='display: block;margin-bottom:15px;' class='fa fa-chevron-up' aria-hidden='true'></i><i onclick='moveDown()' class='fa fa-chevron-down' aria-hidden='true' style='display: block;'></i></div>")
-    $(this).append("<div style='text-align:center;color:white'><i onclick='duplicateTr()' class='iconEdit fa fa-copy' aria-hidden='true' style='display: block;margin-bottom:15px;'></i><i onclick='deleteTr()' class='iconEdit fa fa-trash' aria-hidden='true' style='display: block;'></i></div>")
+    $(this).children("table").css("position", "relative")
     if ($(this).hasClass("item")) {
-        $(this).children("table").css("position", "relative")
-        $(this).children("table").append("<div class='editP' style='z-index: 1000;text-align:center;color:white;position: absolute;width: 100%;height: 30px;background: rgba(0,0,0,0.5);top: 0;left: 0;' onclick='editItem()'>Editar producto <i style='margin-left: 15px;' class='fa fa-pencil' aria-hidden='true'></i></div>")
-    };
+        $(this).children("table").append("<div class='editBar'><i onclick='duplicateTr()' class='iconEdit copyIcon fa fa-copy' aria-hidden='true'></i><i onclick='deleteTr()' class='iconEdit trashIcon fa fa-trash' aria-hidden='true'></i><i class='fa fa-pencil productIcon iconEdit' aria-hidden='true' onclick='editItem()'></i></div>")
+    } else {
+        $(this).children("table").append("<div class='editBar'><i onclick='duplicateTr()' class='iconEdit copyIcon fa fa-copy' aria-hidden='true'></i><i onclick='deleteTr()' class='iconEdit trashIcon fa fa-trash' aria-hidden='true'></i></div>")
+    }
 
 })
 
@@ -3228,13 +3219,14 @@ function duplicateTr() {
 function deleteTr() {
     $(".trEdit").parent().remove();
 }
-
+//DEPRECATED. USE DRAG AND DROP NOW
 function moveUp() {
     var previousItem = $(".trEdit").parent().prev();
 
     $(".trEdit").parent().detach().insertBefore(previousItem);
 }
 
+//DEPRECATED. USE DRAG AND DROP NOW
 function moveDown() {
     var nextItem = $(".trEdit").parent().next();
 
@@ -3279,7 +3271,7 @@ function titleOut () {
 }
 
 function trOut() {
-    $(".trEdit").children('div').remove()
+    $(".editBar").remove()
     $(".trEdit").css("cursor", 'auto');
     $(".trEdit").removeAttr("href");
     $(".trEdit").removeAttr("onclick");
