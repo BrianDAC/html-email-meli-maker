@@ -82,6 +82,9 @@ i.iconEdit {
     position: absolute;
     top: 0;
     background: rgba(0, 0, 0, 0.48);
+    cursor: pointer;
+    min-width: 30px;
+    min-height: 30px;
 }
 
 .btnEdit div {
@@ -3288,14 +3291,15 @@ $(document).ready(function () {
         {
           $(this).width($originals.eq(index).width())
         });
+        console.log("$helper",$helper)
         return $helper;
     };
 
     //Make diagnosis table sortable
     $("#mainStructure tbody").sortable({
+        cancel:"table:not(#mainStructure)",
         helper: fixHelperModified}).disableSelection();
-
-})
+    })
 
 </script>
 <!-- Modal Structure -->
