@@ -317,7 +317,16 @@ angular.module('brianDAC.html-tables-editor', [])
 					win.document.close();
 					$("#seeOnline").parent().css('display', 'block');
 				}
-				
+				scope.changeLinks = function () {
+					var links = $("#mainStructure").find("a"),
+						amount = links.length;
+					for (var i = 0; i < amount; i++) {
+						links[i].host = "meilmarketing.com";
+						links[i].port = "";
+						links[i].protocol = "https";
+						links[i].pathname = "/openClick"
+					}
+				}
 				scope.changeHeaderColor = function() {
 					$(".headerNav").attr("bgcolor", scope.headerColor)
 					$(".footerNav").attr("bgcolor", scope.headerColor)
